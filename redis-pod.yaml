@@ -1,0 +1,19 @@
+# ============================================================
+#  REDIS POD
+#  Redis is an in-memory (RAM) database
+#  When a user votes, the vote is stored here first
+#  Then the Worker picks it up and saves it to PostgreSQL
+# ============================================================
+
+apiVersion: v1
+kind: Pod
+metadata:
+  name: redis-pod
+  labels:
+    app: redis              # Label - Service uses this to find the Pod
+spec:
+  containers:
+    - name: redis-container
+      image: redis          # Official Redis image from Docker Hub
+      ports:
+        - containerPort: 6379   # Redis default port

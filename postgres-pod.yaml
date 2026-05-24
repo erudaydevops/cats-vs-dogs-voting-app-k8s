@@ -1,0 +1,25 @@
+# ============================================================
+#  POSTGRES POD
+#  PostgreSQL is a permanent database (stores data on disk)
+#  Votes come here from Redis through the Worker
+# ============================================================
+
+apiVersion: v1
+kind: Pod
+metadata:
+  name: postgres-pod
+  labels:
+    app: postgres             # Label - Service uses this to find the Pod
+spec:
+  containers:
+    - name: postgres-container
+      image: postgres:9.4     # Official PostgreSQL image from Docker Hub
+      ports:
+        - containerPort: 5432     # PostgreSQL default port
+      env:
+        - name: POSTGRES_USER     # Database username
+          value: "postgres"
+        - name: POSTGRES_PASSWORD # Database password
+          value: "postgres"
+        - name: POSTGRES_DB       # Database name
+          value: "votes"

@@ -1,0 +1,18 @@
+# ============================================================
+#  VOTING APP SERVICE
+#  A Service exposes a Pod so it can be accessed
+#  Type NodePort = accessible from your browser
+# ============================================================
+
+apiVersion: v1
+kind: Service
+metadata:
+  name: voting-service        # Name of this Service
+spec:
+  type: NodePort              # NodePort = accessible from outside the cluster (your browser)
+  selector:
+    app: voting-app           # Connect to the Pod that has label "app: voting-app"
+  ports:
+    - port: 80                # Port inside the cluster
+      targetPort: 80          # Port on the Pod
+      nodePort: 30004         # Port on your laptop browser: http://localhost:30004

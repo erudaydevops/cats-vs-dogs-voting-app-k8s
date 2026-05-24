@@ -1,0 +1,18 @@
+# ============================================================
+#  RESULT APP SERVICE
+#  Type NodePort = accessible from your browser
+#  Open http://localhost:30005 to see the voting results
+# ============================================================
+
+apiVersion: v1
+kind: Service
+metadata:
+  name: result-service
+spec:
+  type: NodePort              # NodePort = accessible from browser
+  selector:
+    app: result-app           # Connect to the Pod that has label "app: result-app"
+  ports:
+    - port: 80
+      targetPort: 80
+      nodePort: 30005         # Open in browser: http://localhost:30005

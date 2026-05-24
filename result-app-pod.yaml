@@ -1,0 +1,19 @@
+# ============================================================
+#  RESULT APP POD
+#  This is the Node.js app that shows voting results
+#  It reads from PostgreSQL and displays results in the browser
+# ============================================================
+
+apiVersion: v1
+kind: Pod
+metadata:
+  name: result-app-pod
+  labels:
+    app: result-app
+    tier: frontend
+spec:
+  containers:
+    - name: result-app-container
+      image: kodekloud/examplevotingapp_result:before   # Ready-made image from Docker Hub
+      ports:
+        - containerPort: 80

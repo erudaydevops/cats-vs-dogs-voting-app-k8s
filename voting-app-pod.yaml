@@ -1,0 +1,23 @@
+# ============================================================
+#  VOTING APP POD
+#  This is the frontend where users vote for Cats or Dogs
+#  Using a ready-made image from Docker Hub (no build needed)
+# ============================================================
+
+apiVersion: v1          # Kubernetes API version
+kind: Pod               # We are creating a Pod
+metadata:
+  name: voting-app-pod  # Name of this Pod
+  labels:
+    app: voting-app     # Label - Service uses this to find the Pod
+    tier: frontend
+
+spec:
+  containers:
+    - name: voting-app-container
+      image: kodekloud/examplevotingapp_vote:before   # Ready-made image from Docker Hub
+      ports:
+        - containerPort: 80       # The app runs on port 80 inside the container
+      env:
+        - name: REDIS_HOST        # Tell the app where Redis is
+          value: "redis-service"  # This must match the name in redis-service.yaml
