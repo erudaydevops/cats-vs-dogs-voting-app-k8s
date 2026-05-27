@@ -1,0 +1,15 @@
+# ConfigMap stores non-sensitive configuration
+# Pods read these as environment variables
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: worktrack-config
+  namespace: worktrack
+data:
+  DB_HOST:    "postgres-service"
+  DB_PORT:    "5432"
+  DB_NAME:    "worktrack"
+  DB_USER:    "postgres"
+  REDIS_HOST: "redis-service"
+  REDIS_PORT: "6379"
+  PORT:       "5000"

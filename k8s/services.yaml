@@ -1,0 +1,56 @@
+# PostgreSQL Service — ClusterIP (internal only)
+apiVersion: v1
+kind: Service
+metadata:
+  name: postgres-service
+  namespace: worktrack
+spec:
+  type: ClusterIP
+  selector:
+    app: postgres
+  ports:
+    - port: 5432
+      targetPort: 5432
+---
+# Redis Service — ClusterIP (internal only)
+apiVersion: v1
+kind: Service
+metadata:
+  name: redis-service
+  namespace: worktrack
+spec:
+  type: ClusterIP
+  selector:
+    app: redis
+  ports:
+    - port: 6379
+      targetPort: 6379
+---
+# Backend Service — ClusterIP (nginx proxies to this)
+apiVersion: v1
+kind: Service
+metadata:
+  name: backend-service
+  namespace: worktrack
+spec:
+  type: ClusterIP
+  selector:
+    app: backend
+  ports:
+    - port: 5000
+      targetPort: 5000
+---
+# Frontend Service — NodePort (accessible from browser)
+apiVersion: v1
+kind: Service
+metadata:
+  name: frontend-service
+  namespace: worktrack
+spec:
+  type: NodePort
+  selector:
+    app: frontend
+  ports:
+    - port: 80
+      targetPort: 80
+      nodePort: 30080
